@@ -137,15 +137,15 @@ int main(void)
  
   /* USER CODE BEGIN 2 */
 
-	/* (1) : SPI Transmit, write to config reg on address 0x80 */
-	// Step(1): Bring the CS pin low to activate the slave device
-	CS_ENABLE
-	HAL_Delay(10); //This delay is very important in the case of STM32F334 in order to work with MAX31865
-	// Step(2): Transmit config reg address  & data
-	HAL_SPI_Transmit(&hspi1, &config_reg_write[0], 1, TIMEOUT_VAL);
-	HAL_SPI_Transmit(&hspi1, &config_reg_write[1], 1, TIMEOUT_VAL);
-	// Step(3): Bring the CS pin high again
-	CS_DISABLE
+ /* (1) : SPI Transmit, write to config reg on address 0x80 */
+  // Step(1): Bring the CS pin low to activate the slave device
+  CS_ENABLE
+  HAL_Delay(10); //This delay is very important in the case of STM32F334 in order to work with MAX31865
+  // Step(2): Transmit config reg address  & data
+  HAL_SPI_Transmit(&hspi1, &config_reg_write[0], 1, TIMEOUT_VAL);
+  HAL_SPI_Transmit(&hspi1, &config_reg_write[1], 1, TIMEOUT_VAL);
+  // Step(3): Bring the CS pin high again
+  CS_DISABLE
 	
 	// give the sensor time to set up
   HAL_Delay(100);
@@ -158,22 +158,22 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-		HAL_Delay(500);
+    HAL_Delay(500);
 		
-		MAX31865_full_read();
+    MAX31865_full_read();
 		
-		/* calculate RTD resistance */
+    /* calculate RTD resistance */
     tmp = ((double)rtd_data.rtd_res_raw * 4000) / 32768; // Replace 4000 by 400 for PT100
-		sprintf(Rrtd, "Rrtd = %lf\n", tmp);
-		HAL_UART_Transmit(&huart2, (uint8_t *)Rrtd, 30, TIMEOUT_VAL); // print RTD resistance
-		HAL_Delay(2000);
+    sprintf(Rrtd, "Rrtd = %lf\n", tmp);
+    HAL_UART_Transmit(&huart2, (uint8_t *)Rrtd, 30, TIMEOUT_VAL); // print RTD resistance
+    HAL_Delay(2000);
 		
-		/* calculate RTD temperature (simple calc, +/- 2 deg C from -100C to 100C) */
-		/* more accurate curve can be used outside that range */
-		tmp = ((double)rtd_data.rtd_res_raw / 32) - 256;
-		sprintf(Trtd, "Trtd = %lf deg C\n", tmp);
-		HAL_UART_Transmit(&huart2, (uint8_t *)Trtd, 30, TIMEOUT_VAL); // print RTD temperature
-		HAL_Delay(2000);
+    /* calculate RTD temperature (simple calc, +/- 2 deg C from -100C to 100C) */
+    /* more accurate curve can be used outside that range */
+    tmp = ((double)rtd_data.rtd_res_raw / 32) - 256;
+    sprintf(Trtd, "Trtd = %lf deg C\n", tmp);
+    HAL_UART_Transmit(&huart2, (uint8_t *)Trtd, 30, TIMEOUT_VAL); // print RTD temperature
+    HAL_Delay(2000);
   }
   /* USER CODE END 3 */
 
