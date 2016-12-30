@@ -36,7 +36,7 @@
 /* USER CODE BEGIN Includes */
 /* Macros to enable & disable CS pin */
 #define CS_ENABLE		do { HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET); } while(0);
-#define CS_DISABLE	do { HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET); } while(0);
+#define CS_DISABLE		do { HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET); } while(0);
 
 /* SPI TIMEOUT Value*/
 #define TIMEOUT_VAL 60
