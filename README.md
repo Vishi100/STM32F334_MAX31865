@@ -32,5 +32,5 @@ The complete preogramming has been done in GUI.
 3) The output is displayed via UART.
 
 
-Note: Eliminate the error of +/- 2 degree celsius using other calculations, etc.
+Note: Eliminate the error of +/- 2 degree celsius using other calculations, etc. Separate driver code (MAX31865.c) has been included in the source directory with its header file (MAX31865.h) in the include directory but the project hasn't been updated by making using of them.
 						
